@@ -3,19 +3,21 @@ package Users.Administration;
 import DatabaseSystem.AdminDb;
 import Users.User;
 import java.io.FileReader;  
-import java.io.IOException;  
+import java.io.IOException;
+import java.sql.SQLException;
+
 import com.opencsv.CSVReader;  
 
 public class Admin extends User{
     
     private static AdminDb adminDb = new AdminDb();
     
-    public Admin(String mobileNumber, String password, int age, String gender, String type, String loginStatus) {
+    public Admin(String mobileNumber, String password, String age, String gender, String type, String loginStatus) {
         super(mobileNumber, password, age, gender, type, loginStatus);
     }
 
     public Admin() {
-        super(null,null,0,null,null,null);
+        super(null,null,null,null,null,null);
     }
 
     public static boolean addBus(String pathCSV){
@@ -46,13 +48,24 @@ public class Admin extends User{
     }
 
     @Override
-    public boolean userLogin(String email,String password) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean userLogin(String mobileNumber,String password) throws SQLException {
+        String userPassword = adminDb.getUserPassword(mobileNumber);
+        if(userPassword.equals(password)){
+         this.setLoginStatus("true");
+         adminDb.updateUserLoginStatus(getMobileNumber(), getLoginStatus());
+         return true;
+     }
+        else return false;
     }
 
     @Override
-    public boolean userLogout(String mobileNumber) {
+    public boolean userLogout(String mobileNumber) throws SQLException {
+        this.setLoginStatus("false");
+        return adminDb.updateUserLoginStatus(mobileNumber, "false");
+    }
+
+    @Override
+    public boolean userRegister(String csvPath) throws SQLException {
         // TODO Auto-generated method stub
         return false;
     }

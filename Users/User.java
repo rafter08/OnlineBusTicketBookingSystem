@@ -5,14 +5,19 @@ import java.sql.SQLException;
 public abstract class User {
     private String mobileNumber;
     private String password;
-    private int age;
+    private String age;
     private String gender;
     private String type;
     private String loginStatus;
     
    
     
-    public User(String mobileNumber, String password, int age, String gender, String type, String loginStatus) {
+    @Override
+    public String toString() {
+        return "User [mobileNumber=" + mobileNumber + ", password=" + password + ", age=" + age + ", gender=" + gender
+                + ", type=" + type + ", loginStatus=" + loginStatus + "]";
+    }
+    public User(String mobileNumber, String password, String age, String gender, String type, String loginStatus) {
         this.mobileNumber = mobileNumber;
         this.password = password;
         this.age = age;
@@ -46,10 +51,10 @@ public abstract class User {
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
-    public int getAge() {
+    public String getAge() {
         return age;
     }
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
     public String getGender() {
@@ -61,6 +66,7 @@ public abstract class User {
     
     public abstract boolean userLogin(String mobileNumber,String password) throws SQLException;
     public abstract boolean userLogout(String mobileNumber) throws SQLException;
+    public abstract boolean userRegister(String csvPath) throws SQLException;
 
 
 }
