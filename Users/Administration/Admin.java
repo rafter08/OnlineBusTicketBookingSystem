@@ -1,26 +1,18 @@
 package Users.Administration;
 
+import DatabaseSystem.AdminDb;
 import Users.User;
 
 public class Admin extends User{
-    private String adminID;
-
-    public Admin(String userName, String password, String email, String mobileNumber, String age, String gender,
-            String adminID) {
-        super(userName, password, email, mobileNumber, age, gender);
-        this.adminID = adminID;
-    }
-
-    public String getAdminID() {
-        return adminID;
-    }
-
-    public void setAdminID(String adminID) {
-        this.adminID = adminID;
+    
+    private static AdminDb adminDb = new AdminDb();
+    
+    public Admin(String mobileNumber, String password, int age, String gender, String type, String loginStatus) {
+        super(mobileNumber, password, age, gender, type, loginStatus);
     }
 
     @Override
-    public boolean userLogin() {
+    public boolean userLogin(String email,String password) {
         // TODO Auto-generated method stub
         return false;
     }
