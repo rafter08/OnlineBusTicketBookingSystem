@@ -2,7 +2,7 @@ package Users.Customer;
 
 public class Ticket {
     private String ticketID;
-    private Customer customer;
+    private String customerMobileNumber;
     private String boardingPoint;
     private String departingPoint;
     private String journeyDate;
@@ -12,10 +12,10 @@ public class Ticket {
     private int price;
     
    
-    public Ticket(String ticketID, Customer customer, String boardingPoint, String departingPoint, String journeyDate,
+    public Ticket(String ticketID,String customerMobileNumber, String boardingPoint, String departingPoint, String journeyDate,
             String boardingTime, String departureTime, String busID, int price) {
         this.ticketID = ticketID;
-        this.customer = customer;
+        this.customerMobileNumber = customerMobileNumber;
         this.boardingPoint = boardingPoint;
         this.departingPoint = departingPoint;
         this.journeyDate = journeyDate;
@@ -30,11 +30,11 @@ public class Ticket {
     public void setTicketID(String ticketID) {
         this.ticketID = ticketID;
     }
-    public Customer getCustomer() {
-        return customer;
+    public String getCustomerMobileNumber() {
+        return customerMobileNumber;
     }
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerMobileNumber(String customerMobileNumber) {
+        this.customerMobileNumber = customerMobileNumber;
     }
     public String getBoardingPoint() {
         return boardingPoint;
