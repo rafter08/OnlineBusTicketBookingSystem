@@ -1,6 +1,8 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\chandu\\Downloads\\opencsv-3.8.jar"
+        "c:\\Users\\chandu\\Downloads\\opencsv-3.8.jar",
+        "c:\\Users\\abboj\\Downloads\\mysql-connector-java-8.0.30.jar",
+        "c:\\Users\\abboj\\Downloads\\opencsv-3.8.jar"
     ]
 }

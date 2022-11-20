@@ -14,22 +14,27 @@ public class Admin extends User{
         super(mobileNumber, password, age, gender, type, loginStatus);
     }
 
+    public Admin() {
+        super(null,null,0,null,null,null);
+    }
+
     public static boolean addBus(String pathCSV){
         CSVReader reader = null;  
         try  
         {  
         reader = new CSVReader(new FileReader(pathCSV));    
         String [] nL;  
+        reader.readNext();
         //read one line at a time  
             while ((nL = reader.readNext()) != null)  
             {  
                Bus bus = new Bus(nL[0],nL[1],nL[2],nL[3],nL[4],nL[5]);
                if(adminDb.getBusRecord(bus.getBusID())==null){
-                if(!adminDb.insertBusRecord(bus))return false;
-               }else{
-                if(!adminDb.updateBusRecord(bus))return false;
-               }
-            } 
+                adminDb.insertBusRecord(bus);
+               }else
+                adminDb.updateBusRecord(bus);
+               
+            }
             return true; 
         }  
         catch (Exception e)   

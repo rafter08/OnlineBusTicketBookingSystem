@@ -1,14 +1,18 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import DatabaseSystem.AdminDb;
 import DatabaseSystem.UserDb;
 import Users.User;
+import Users.Administration.Admin;
 
 public class Main {
     private static UserDb userDb = new UserDb();
+    private static Admin admin = new Admin();
     private static User user;
     public static void main(String[] args) throws SQLException {
         if(args.length>0)executeCommandLineArguments(args);
+        Admin.addBus("D:\\javaproject1.csv");
     }
 
     public static void executeCommandLineArguments(String[] args) throws SQLException{
