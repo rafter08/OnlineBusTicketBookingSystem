@@ -60,7 +60,7 @@ public abstract class User {
     }
     
     public abstract boolean userLogin(String mobileNumber,String password) throws SQLException;
-    public abstract boolean userLogout();
+    public abstract boolean userLogout(String mobileNumber) throws SQLException;
 
 
 }

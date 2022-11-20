@@ -63,10 +63,16 @@ public class Customer extends User {
      }
     
     @Override
-    public boolean userLogout() {
-        // TODO Auto-generated method stub
+    public boolean userLogout(String mobileNumber) throws SQLException {
+       this.setLoginStatus("false");
+        return customerDb.updateUserLoginStatus(mobileNumber, "false");
+    }
+
+    public boolean bookTicket(String boardingPoint,String departingPoint,String Date){
         return false;
     }
+
+
     
     
 }

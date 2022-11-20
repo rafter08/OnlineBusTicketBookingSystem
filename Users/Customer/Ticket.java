@@ -2,27 +2,15 @@ package Users.Customer;
 
 public class Ticket {
     private String ticketID;
-    private String customerMobileNumber;
-    private String boardingPoint;
-    private String departingPoint;
-    private String journeyDate;
-    private String boardingTime;
-    private String departureTime;
     private String busID;
-    private int price;
+    private String customerMobileNumber;
+    private String journeyDate;
     
-   
-    public Ticket(String ticketID,String customerMobileNumber, String boardingPoint, String departingPoint, String journeyDate,
-            String boardingTime, String departureTime, String busID, int price) {
+    public Ticket(String ticketID, String busID, String customerMobileNumber, String journeyDate) {
         this.ticketID = ticketID;
-        this.customerMobileNumber = customerMobileNumber;
-        this.boardingPoint = boardingPoint;
-        this.departingPoint = departingPoint;
-        this.journeyDate = journeyDate;
-        this.boardingTime = boardingTime;
-        this.departureTime = departureTime;
         this.busID = busID;
-        this.price = price;
+        this.customerMobileNumber = customerMobileNumber;
+        this.journeyDate = journeyDate;
     }
     public String getTicketID() {
         return ticketID;
@@ -30,53 +18,23 @@ public class Ticket {
     public void setTicketID(String ticketID) {
         this.ticketID = ticketID;
     }
-    public String getCustomerMobileNumber() {
-        return customerMobileNumber;
-    }
-    public void setCustomerMobileNumber(String customerMobileNumber) {
-        this.customerMobileNumber = customerMobileNumber;
-    }
-    public String getBoardingPoint() {
-        return boardingPoint;
-    }
-    public void setBoardingPoint(String boardingPoint) {
-        this.boardingPoint = boardingPoint;
-    }
-    public String getDepartingPoint() {
-        return departingPoint;
-    }
-    public void setDepartingPoint(String departingPoint) {
-        this.departingPoint = departingPoint;
-    }
-    public String getJourneyDate() {
-        return journeyDate;
-    }
-    public void setJourneyDate(String journeyDate) {
-        this.journeyDate = journeyDate;
-    }
-    public String getBoardingTime() {
-        return boardingTime;
-    }
-    public void setBoardingTime(String boardingTime) {
-        this.boardingTime = boardingTime;
-    }
-    public String getDepartureTime() {
-        return departureTime;
-    }
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
     public String getBusID() {
         return busID;
     }
     public void setBusID(String busID) {
         this.busID = busID;
     }
-    public int getPrice() {
-        return price;
+    public String getCustomerMobileNumber() {
+        return customerMobileNumber;
     }
-    public void setPrice(int price) {
-        this.price = price;
+    public void setCustomerMobileNumber(String customerMobileNumber) {
+        this.customerMobileNumber = customerMobileNumber;
+    }
+    public String getJourneyDate() {
+        return journeyDate;
+    }
+    public void setJourneyDate(String journeyDate) {
+        this.journeyDate = journeyDate;
     }
     
 }
