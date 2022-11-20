@@ -43,21 +43,19 @@ public class UserDb {
     }
 
     public  boolean updateUserLoginStatus(String mobileNumber,String status) throws SQLException{
-        String Query = "update user set loginstatus ="+status+"where mobileNumber = "+mobileNumber;
+        String Query = "update user set loginstatus ='"+status+"' where mobileNumber = '"+mobileNumber+"'";
         return statement.execute(Query);
     }
 
     public User getUser(String mobileNumber) throws SQLException{
-        String Query = "select * from user where mobileNumber = "+mobileNumber;
+        String Query = "select * from user where mobileNumber = '"+mobileNumber+"'";
         rs = statement.executeQuery(Query);
         User user = null;
         if(rs.next()){
             String type = rs.getString("type");
             if(type.toLowerCase().equals("customer")){
-                String Query2 = "select * from customer where mobileNumber = "+rs.getString("mobileNumber");
-                ResultSet rs2 = statement.executeQuery(Query2);
-                if(rs2.next())
-                user = new Customer(rs.getString(0),rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs2.getString(1),rs2.getString(2));
+                
+                user = new Customer(rs.getString("mobileNumber"),rs.getString("password"),rs.getInt("age"),rs.getString("gender"),rs.getString("type"),rs.getString("loginStatus"));
             }
             else if(type.toLowerCase().equals("admin")){
                 user = new Admin(rs.getString(0),rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5));
