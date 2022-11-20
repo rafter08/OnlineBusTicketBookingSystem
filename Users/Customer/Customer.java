@@ -67,6 +67,12 @@ public class Customer extends User {
         // TODO Auto-generated method stub
         return false;
     }
+
+    public boolean bookTicket(String boardingPoint,String departingPoint,String Date){
+        return false;
+    }
+
+
     
     
 }

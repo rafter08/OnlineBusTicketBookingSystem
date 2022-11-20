@@ -1,14 +1,14 @@
 package Users.Feedback;
 
-import Users.User;
+
 
 public class Complaint {
     private String complaintStatement;
-    private User user;
+    private String userMobileNumber;
     private String complaintID;
-    public Complaint(String complaintStatement, User user, String complaintID) {
+    public Complaint(String complaintStatement, String userMobileNumber, String complaintID) {
         this.complaintStatement = complaintStatement;
-        this.user = user;
+        this.userMobileNumber = userMobileNumber;
         this.complaintID = complaintID;
     }
     public String getComplaintStatement() {
@@ -17,17 +17,18 @@ public class Complaint {
     public void setComplaintStatement(String complaintStatement) {
         this.complaintStatement = complaintStatement;
     }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
+   
     public String getComplaintID() {
         return complaintID;
     }
     public void setComplaintID(String complaintID) {
         this.complaintID = complaintID;
+    }
+    public String getUserMobileNumber() {
+        return userMobileNumber;
+    }
+    public void setUserMobileNumber(String userMobileNumber) {
+        this.userMobileNumber = userMobileNumber;
     }
     
 }
