@@ -1,53 +1,72 @@
 package Users.Customer;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import DatabaseSystem.CustomerDb;
 import Users.User;
 
 public class Customer extends User {
-    private String address;
-    private String paymentMethod;
-    private String preference;
-    private String rating;
-    public Customer(String userName, String password, String email, String mobileNumber, String age, String gender,
-            String address, String paymentMethod, String preference, String rating) {
-        super(userName, password, email, mobileNumber, age, gender);
-        this.address = address;
-        this.paymentMethod = paymentMethod;
-        this.preference = preference;
-        this.rating = rating;
+  
+    private String userName;
+    private String paymentType;
+    private ArrayList<Ticket> previousBookings;
+    private static CustomerDb customerDb = new CustomerDb();
+
+    public Customer(String mobileNumber, String password, int age, String gender, String type, String loginStatus) {
+    super(mobileNumber, password, age, gender, type, loginStatus);
+    
     }
-    public String getAddress() {
-        return address;
+
+    public Customer(String mobileNumber, String password, int age, String gender, String type, String loginStatus,
+            String userName, String paymentType) {
+        super(mobileNumber, password, age, gender, type, loginStatus);
+        this.userName = userName;
+        this.paymentType = paymentType;
     }
-    public void setAddress(String address) {
-        this.address = address;
+    
+
+    public String getUserName() {
+        return userName;
     }
-    public String getPaymentMethod() {
-        return paymentMethod;
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+
+    public String getPaymentType() {
+        return paymentType;
     }
-    public String getPreference() {
-        return preference;
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
-    public void setPreference(String preference) {
-        this.preference = preference;
+
+    public ArrayList<Ticket> getPreviousBookings() {
+        return previousBookings;
     }
-    public String getRating() {
-        return rating;
+
+    public void setPreviousBookings(ArrayList<Ticket> previousBookings) {
+        this.previousBookings = previousBookings;
     }
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
+
     @Override
-    public boolean userLogin() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+    public boolean userLogin(String mobileNumber, String password) throws SQLException {
+        String userPassword = customerDb.getUserPassword(mobileNumber);
+        if(userPassword.equals(password)){
+         this.setLoginStatus("true");
+         customerDb.updateUserLoginStatus(getMobileNumber(), getLoginStatus());
+         return true;
+     }
+        else return false;
+         
+     }
+    
     @Override
     public boolean userLogout() {
         // TODO Auto-generated method stub
         return false;
     }
+    
     
 }
