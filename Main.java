@@ -8,21 +8,30 @@ public class Main {
     private static UserDb userDb = new UserDb();
     private static User user;
     public static void main(String[] args) throws SQLException {
-        if(args.length>0)executeCommandLineArguments(args);
+       
     }
 
     public static void executeCommandLineArguments(String[] args) throws SQLException{
         String function = commandArgs(args);
         switch(function){
             case "login" : {
-                user = userDb.getUser(args[1]);
-                if(user.userLogin(args[1], args[2]))System.out.println("Login success");
-                else System.out.println("Login failed");
+                login(args[1],args[2]);
+                break;
+            }
+            case "logout" : {
+                logout(args[1]);
+                break;
             }
         }
     }
 
-    public static void login(){
+    public static void login(String mobileNumber,String password) throws SQLException{
+        user = userDb.getUser(mobileNumber);
+                if(user.userLogin(mobileNumber, password))System.out.println("Login success");
+                else System.out.println("Login failed");
+    }
+
+    public static void logout(String mobileNumber){
 
     }
 
@@ -34,6 +43,7 @@ public class Main {
         }
         else if(args.length == 2){
             if(args[0].toLowerCase().equals("login"))return "login1";
+            if(args[0].toLowerCase().equals("logout"))return "logout";
         }
         else if(args.length==3){
             if(args[0].toLowerCase().equals("login"))return "login";
