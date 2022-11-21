@@ -206,7 +206,6 @@ public class Main {
         if(args.length == 0)return null;
         else if(args.length == 1){
             if(args[0].toLowerCase().equals("help"))return "help";
-            else if(args[0].toLowerCase().equals("viewjobs"))return "viewjobs";
             else if(args[0].equalsIgnoreCase("searchbus"))return "searchbus";
         }
         else if(args.length == 2){
