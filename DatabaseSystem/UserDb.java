@@ -1,9 +1,11 @@
 package DatabaseSystem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import Users.User;
 import Users.Administration.Admin;
+import Users.Administration.Bus;
 import Users.Customer.Customer;
 
 public class UserDb {
@@ -27,12 +29,12 @@ public class UserDb {
 
     public   boolean addUserRecord(User user) throws SQLException{
         String Query = "insert into user values('"+user.getMobileNumber()+"','"+user.getPassword()+"','"+user.getAge()+"','"+user.getGender()+"','"+user.getType()+"','"+user.getLoginStatus()+"')";
-        return statement.execute(Query);
+        return !statement.execute(Query);
     }
      
     public  boolean deleteUserRecord(User user) throws SQLException{
         String Query = "delete from user where mobileNumber="+user.getMobileNumber();
-        return statement.execute(Query);
+        return !statement.execute(Query);
     }
 
     public String getUserPassword(String mobileNumber) throws SQLException{
@@ -42,28 +44,46 @@ public class UserDb {
         else return null;
     }
 
+    public String getUserLoginStatus(String mobileNumber) throws SQLException{
+        String Query = "select loginStatus from user where mobileNumber  = '"+mobileNumber+"'";
+        rs = statement.executeQuery(Query);
+        if(rs.next()){
+            String loginStatus = rs.getString("loginStatus");
+            return loginStatus;
+        }
+        return null;
+    }
+
     public  boolean updateUserLoginStatus(String mobileNumber,String status) throws SQLException{
-        String Query = "update user set loginstatus ="+status+"where mobileNumber = "+mobileNumber;
-        return statement.execute(Query);
+        String Query = "update user set loginstatus ='"+status+"' where mobileNumber = '"+mobileNumber+"'";
+        return !statement.execute(Query);
     }
 
     public User getUser(String mobileNumber) throws SQLException{
-        String Query = "select * from user where mobileNumber = "+mobileNumber;
+        String Query = "select * from user where mobileNumber = '"+mobileNumber+"'";
         rs = statement.executeQuery(Query);
         User user = null;
         if(rs.next()){
             String type = rs.getString("type");
             if(type.toLowerCase().equals("customer")){
-                String Query2 = "select * from customer where mobileNumber = "+rs.getString("mobileNumber");
-                ResultSet rs2 = statement.executeQuery(Query2);
-                if(rs2.next())
-                user = new Customer(rs.getString(0),rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs2.getString(1),rs2.getString(2));
+                
+                user = new Customer(rs.getString("mobileNumber"),rs.getString("password"),rs.getString("age"),rs.getString("gender"),rs.getString("type"),rs.getString("loginStatus"));
             }
             else if(type.toLowerCase().equals("admin")){
-                user = new Admin(rs.getString(0),rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5));
+                user = new Admin(rs.getString("mobileNumber"),rs.getString("password"),rs.getString("age"),rs.getString("gender"),rs.getString("type"),rs.getString("loginStatus"));
             
             }
         }
         return user;
+    }
+
+    public ArrayList<Bus> getAllBus() throws SQLException{
+        String Query = "select * from bus";
+        rs = statement.executeQuery(Query);
+        ArrayList<Bus> bus = new ArrayList<>();
+        while(rs.next()){
+            bus.add(new Bus(rs.getString("busID"),rs.getString("boardingPoint"),rs.getString("droppingPoint"),rs.getString("departureTime"),rs.getString("arrivalTime"),rs.getString("price")));
+        }
+        return bus;
     }
 }

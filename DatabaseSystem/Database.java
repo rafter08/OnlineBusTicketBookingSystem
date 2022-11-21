@@ -3,7 +3,7 @@ package DatabaseSystem;
 public class Database {
     private  String dbURL="jdbc:mysql://localhost:3306/onlinebusticketbookingsystem";
     	private String dbUserName="root";
-    	private String dbPassword="137510";   // change this details according to your local mysql credentials
+    	private String dbPassword="teja@1234t";   // change this details according to your local mysql credentials
         public Database(){}
         public Database(String dbURL, String dbUserName, String dbPassword) {
             this.dbURL = dbURL;
