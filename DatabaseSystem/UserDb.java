@@ -1,9 +1,11 @@
 package DatabaseSystem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import Users.User;
 import Users.Administration.Admin;
+import Users.Administration.Bus;
 import Users.Customer.Customer;
 
 public class UserDb {
@@ -42,9 +44,19 @@ public class UserDb {
         else return null;
     }
 
+    public String getUserLoginStatus(String mobileNumber) throws SQLException{
+        String Query = "select loginStatus from user where mobileNumber  = '"+mobileNumber+"'";
+        rs = statement.executeQuery(Query);
+        if(rs.next()){
+            String loginStatus = rs.getString("loginStatus");
+            return loginStatus;
+        }
+        return null;
+    }
+
     public  boolean updateUserLoginStatus(String mobileNumber,String status) throws SQLException{
         String Query = "update user set loginstatus ='"+status+"' where mobileNumber = '"+mobileNumber+"'";
-        return statement.execute(Query);
+        return !statement.execute(Query);
     }
 
     public User getUser(String mobileNumber) throws SQLException{
@@ -63,5 +75,15 @@ public class UserDb {
             }
         }
         return user;
+    }
+
+    public ArrayList<Bus> getAllBus() throws SQLException{
+        String Query = "select * from bus";
+        rs = statement.executeQuery(Query);
+        ArrayList<Bus> bus = new ArrayList<>();
+        while(rs.next()){
+            bus.add(new Bus(rs.getString("busID"),rs.getString("boardingPoint"),rs.getString("droppingPoint"),rs.getString("departureTime"),rs.getString("arrivalTime"),rs.getString("price")));
+        }
+        return bus;
     }
 }

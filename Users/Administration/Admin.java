@@ -33,9 +33,11 @@ public class Admin extends User{
                Bus bus = new Bus(nL[0],nL[1],nL[2],nL[3],nL[4],nL[5]);
                if(adminDb.getBusRecord(bus.getBusID())==null){
                 adminDb.insertBusRecord(bus);
-               }else
+                System.out.println("Added bus with Bus ID = "+bus.getBusID());
+               }else{
                 adminDb.updateBusRecord(bus);
-               
+                System.out.println("updated bus with ID = "+bus.getBusID());
+               }
             }
             return true; 
         }  

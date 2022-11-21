@@ -34,6 +34,7 @@ public abstract class User {
     public String getLoginStatus() {
         return loginStatus;
     }
+    
     public void setLoginStatus(String loginStatus) {
         this.loginStatus = loginStatus;
     }
@@ -67,6 +68,6 @@ public abstract class User {
     public abstract boolean userLogin(String mobileNumber,String password) throws SQLException;
     public abstract boolean userLogout(String mobileNumber) throws SQLException;
     public abstract boolean userRegister(String csvPath) throws SQLException;
-
+    
 
 }

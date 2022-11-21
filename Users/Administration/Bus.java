@@ -55,6 +55,13 @@ public class Bus {
         this.price = price;
     }
     
+    public void printBusDetails(){
+        System.out.println("BusID : "+getBusID());
+        System.out.println("BoardingPoint --> DroppingPoint : "+getBoardingPoint() +" --> "+getDroppingPoint());
+        System.out.println("DepartureTime --> ArrivalTime   : "+getDepartureTime() + " --> "+getArrivalTime());
+        System.out.println("Ticket Price : Rs "+getPrice());
+        System.out.println("**********************************************************************************************");
+    }
    
     
     

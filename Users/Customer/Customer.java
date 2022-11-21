@@ -78,8 +78,18 @@ public class Customer extends User {
         return customerDb.updateUserLoginStatus(mobileNumber, "false");
     }
 
-    public boolean bookTicket(String boardingPoint,String departingPoint,String Date){
-        return false;
+    public boolean bookTicket(String busID,String mobileNumber,String journeyDate) throws SQLException{
+        Ticket ticket = new Ticket(busID+mobileNumber, busID, mobileNumber, journeyDate);
+        if(customerDb.addTicket(ticket)){
+            System.out.println("Ticket Booked!");
+            System.out.println("Ticket Details : ");
+            ticket.printTicketDetails();
+            return true;
+        }
+        else {
+            System.out.println("Booking Failed!");
+            return false;
+        }
     }
 
     @Override
