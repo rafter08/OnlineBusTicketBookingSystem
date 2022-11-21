@@ -68,8 +68,27 @@ public class Admin extends User{
 
     @Override
     public boolean userRegister(String csvPath) throws SQLException {
-        // TODO Auto-generated method stub
-        return false;
+        CSVReader reader = null;  
+        try  
+        {  
+        reader = new CSVReader(new FileReader(csvPath));    
+        String [] nL;  
+        nL=reader.readNext();
+        if(nL==null) return false;
+        this.setMobileNumber(nL[0]);
+        this.setPassword(nL[1]);
+        this.setAge(nL[2]);
+        this.setGender(nL[3]);
+        this.setType(nL[4]);
+        this.setLoginStatus("true");
+        
+        return(adminDb.addUserRecord(this));
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
     }
     
 }
