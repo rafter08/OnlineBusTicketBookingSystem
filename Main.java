@@ -52,6 +52,10 @@ public class Main {
                 addBuses(args[1], args[2]);
                 break;
             }
+            case "deletebuses" : {
+                deleteBuses(args[1], args[2]);
+                break;
+            }
             case "searchbus2" : {
                 searchBus2(args[1],args[2]);
                 break;
@@ -119,7 +123,7 @@ public class Main {
         System.out.println("Buses Available : ");
         System.out.println("**********************************************************************************************");
         for(Bus bus : buses){
-            if(bus.getBoardingPoint().matches(boardingPoint)||bus.getBoardingPoint().equalsIgnoreCase(boardingPoint)|| bus.getBoardingPoint().contentEquals(boardingPoint) ||bus.getDroppingPoint().equalsIgnoreCase(droppingPoint)|| bus.getDroppingPoint().matches(droppingPoint) || bus.getDroppingPoint().contentEquals(droppingPoint)){
+            if((bus.getBoardingPoint().matches(boardingPoint)||bus.getBoardingPoint().equalsIgnoreCase(boardingPoint)|| bus.getBoardingPoint().contentEquals(boardingPoint)) && (bus.getDroppingPoint().equalsIgnoreCase(droppingPoint)|| bus.getDroppingPoint().matches(droppingPoint) || bus.getDroppingPoint().contentEquals(droppingPoint))){
                 bus.printBusDetails();
             }
         }
@@ -131,7 +135,7 @@ public class Main {
         System.out.println("**********************************************************************************************");
         for(Bus bus : buses){
             
-            if(bus.getBoardingPoint().matches(boardingPoint)||bus.getBoardingPoint().equalsIgnoreCase(boardingPoint)|| bus.getBoardingPoint().contentEquals(boardingPoint) ||bus.getDroppingPoint().equalsIgnoreCase(droppingPoint)|| bus.getDroppingPoint().matches(droppingPoint) || bus.getDroppingPoint().contentEquals(droppingPoint)){
+            if((bus.getBoardingPoint().matches(boardingPoint)||bus.getBoardingPoint().equalsIgnoreCase(boardingPoint)|| bus.getBoardingPoint().contentEquals(boardingPoint)) &&(bus.getDroppingPoint().equalsIgnoreCase(droppingPoint)|| bus.getDroppingPoint().matches(droppingPoint) || bus.getDroppingPoint().contentEquals(droppingPoint))){
                 int varprice1 = Integer.parseInt(price);
                 int varprice2  = Integer.parseInt(bus.getPrice());
                 if(varprice2<=varprice1)
@@ -146,7 +150,7 @@ public class Main {
         System.out.println("**********************************************************************************************");
         for(Bus bus : buses){
             
-            if(bus.getBoardingPoint().matches(boardingPoint)||bus.getBoardingPoint().equalsIgnoreCase(boardingPoint)|| bus.getBoardingPoint().contentEquals(boardingPoint) ||bus.getDroppingPoint().equalsIgnoreCase(droppingPoint)|| bus.getDroppingPoint().matches(droppingPoint) || bus.getDroppingPoint().contentEquals(droppingPoint)){
+            if((bus.getBoardingPoint().matches(boardingPoint)||bus.getBoardingPoint().equalsIgnoreCase(boardingPoint)|| bus.getBoardingPoint().contentEquals(boardingPoint)) &&(bus.getDroppingPoint().equalsIgnoreCase(droppingPoint)|| bus.getDroppingPoint().matches(droppingPoint) || bus.getDroppingPoint().contentEquals(droppingPoint))){
                 int varprice1 = Integer.parseInt(price);
                 int varprice2  = Integer.parseInt(bus.getPrice());
                 if(varprice2>=varprice1)
@@ -203,6 +207,27 @@ public class Main {
         }   
     }
 
+    public static void deleteBuses(String mobileNumber,String csvPath) throws SQLException{
+        user = userDb.getUser(mobileNumber);
+        if(user==null){
+            System.out.println("Try Again!");
+            return;
+        }
+        else if(user.getType().equalsIgnoreCase("admin")){
+            if(user.getLoginStatus().equalsIgnoreCase("true")){
+                admin = (Admin)user;
+                Admin.deleteBus(csvPath);
+            }else{
+                System.out.println("please login to continue");
+                return;
+            }
+        }
+        else if(user.getType().equalsIgnoreCase("customer")){
+            System.out.println("You are not authorized to perform this operation");
+            return;
+        }   
+    }
+
     public static void printHelp(){
         System.out.println("'help'                                                -- prints all command line arguments you can use");
         System.out.println("'login' [mobile number] [password]                    -- login using mobile number and password");
@@ -210,6 +235,7 @@ public class Main {
         System.out.println("'register' 'admin' [csvfilepath]                      -- admin registration using csv file");
         System.out.println("'logout' [mobile number]                              -- user logout");
         System.out.println("'addbuses' [admin mobile number] [csvfilepath]        -- adds new bus routes or updates already present bus routes,this can be performed by only admin");
+        System.out.println("'deletebuses' [admin mobile number] [csvfilepath]     -- delete bus routes ,this can be performed by only admin");
         System.out.println("'searchbus'                                           -- prints all buses available with details");
         System.out.println("'searchbus' [boarding point] [dropping point]         -- prints all avilable bus details passing through boarding point or dropping point");
         System.out.println("'searchbus' [boarding point] [dropping point]  'lt' [price] -- prints required buses whose ticket price is less than passed price");
@@ -233,9 +259,10 @@ public class Main {
         }
         else if(args.length==3){
             if(args[0].toLowerCase().equals("login"))return "login";
-            if(args[0].equalsIgnoreCase("addbuses"))return "addbuses";
-            if(args[0].equalsIgnoreCase("searchbus"))return "searchbus2";
-            if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("admin"))return "registeradmin";
+            else if(args[0].equalsIgnoreCase("addbuses"))return "addbuses";
+            else if(args[0].equalsIgnoreCase("deletebuses"))return "deletebuses";
+            else if(args[0].equalsIgnoreCase("searchbus"))return "searchbus2";
+            else if(args[0].equalsIgnoreCase("register") && args[1].equalsIgnoreCase("admin"))return "registeradmin";
         }
         else if(args.length==4){
             if(args[0].equalsIgnoreCase("bookticket"))return "bookticket";
