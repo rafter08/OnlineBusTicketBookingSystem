@@ -49,6 +49,33 @@ public class Admin extends User{
 
     }
 
+    public static boolean deleteBus(String pathCSV){
+        CSVReader reader = null;  
+        try  
+        {  
+        reader = new CSVReader(new FileReader(pathCSV));    
+        String [] nL;  
+        reader.readNext();
+        //read one line at a time  
+            while ((nL = reader.readNext()) != null)  
+            {  
+               String busID = nL[0];
+               if(adminDb.getBusRecord(busID)!=null){
+                adminDb.deleteBusRecord(busID);
+                System.out.println("deleted bus route with Bus ID = "+busID);
+               }
+            }
+            return true; 
+        }  
+        catch (Exception e)   
+        {  
+        e.printStackTrace(); 
+        return false ;
+        }  
+
+    }
+
+
     @Override
     public boolean userLogin(String mobileNumber,String password) throws SQLException {
         String userPassword = adminDb.getUserPassword(mobileNumber);

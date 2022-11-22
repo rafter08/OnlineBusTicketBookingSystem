@@ -9,7 +9,7 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": ["searchBus"]
+            "args": ["searchbus"]
         },
         {
             "type": "java",
@@ -17,7 +17,7 @@
             "request": "launch",
             "mainClass": "Main",
             "projectName": "OnlineBusTicketBookingSystem_90446dd",
-            "args" : ["bookTicket","6033","5506965515","22-05-2022"]
+            "args" : ["searchbus" ,"usa" ,"kadapa"]
         }
     ]
 }

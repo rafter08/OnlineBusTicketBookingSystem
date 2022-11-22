@@ -8,7 +8,7 @@ import Users.Customer.Ticket;
 
 public class CustomerDb extends UserDb{
     public boolean addCustomerRecord(Customer customer) throws SQLException{
-        String Query = "insert into customer values('"+customer.getMobileNumber()+"','"+customer.getUserName()+"','"+customer.getPaymentMethod()+"')";
+        String Query = "insert into customer values('"+customer.getMobileNumber()+"','"+customer.getUserName()+"','"+customer.getPaymentType()+"')";
         return !statement.execute(Query);
     }
 
@@ -18,7 +18,7 @@ public class CustomerDb extends UserDb{
     }
 
     public boolean addTicket(Ticket ticket) throws SQLException{
-        String Query = "insert into ticket values('"+ticket.getTicketID()+"','"+ticket.getCustomerMobileNumber()+"','"+ticket.getBoardingTime()+"','"+ticket.getDepartureTime()+"','"+ticket.getBoardingPoint()+"','"+ticket.getBoardingPoint()+"','"+ticket.getJourneyDate()+"','"+ticket.getBusID()+"','"+ticket.getPrice()+"')";
+        String Query = "insert into ticket values('"+ticket.getTicketID()+"','"+ticket.getBusID()+"','"+ticket.getCustomerMobileNumber()+"','"+ticket.getJourneyDate()+"')";
         return !statement.execute(Query);
     }
 
