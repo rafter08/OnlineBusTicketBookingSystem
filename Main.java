@@ -64,6 +64,10 @@ public class Main {
                 searchBusgt(args[1], args[2], args[4]);
                 break;
             }
+            case "mytickets" : {
+                viewCustomerTickets(args[1]);
+                break;
+            }
             case "help" : {
                 printHelp();
                 break;
@@ -151,6 +155,17 @@ public class Main {
         }
     }
 
+    public static void viewCustomerTickets(String mobileNumber) throws SQLException{
+        customer = (Customer) customerDb.getUser(mobileNumber);
+        if(customer==null || !customer.getType().equalsIgnoreCase("customer")){
+            System.out.println("no customer found with mobile number : "+mobileNumber);
+            return;
+        }
+        customer.setPreviousBookings(customerDb.getCustomerTickets(mobileNumber));
+        for(Ticket ticket : customer.getPreviousBookings())ticket.printTicketDetails();
+
+    }
+
 
     public static void bookTicket(String busID,String mobileNumber,String journeyDate) throws SQLException{
         user  = userDb.getUser(mobileNumber);
@@ -200,6 +215,7 @@ public class Main {
         System.out.println("'searchbus' [boarding point] [dropping point]  'lt' [price] -- prints required buses whose ticket price is less than passed price");
         System.out.println("'searchbus' [boarding point] [dropping point]  'gt' [price] -- prints required buses whose ticket price is greater than passed price");
         System.out.println("'bookticket' [busid] [user mobile number] [journey date] -- bus ticket booking");
+        System.out.println("mytickets [mobileNumber]                               -- to view tickets booked by a customer");
     }
 
     public static String commandArgs(String[] args){
@@ -212,6 +228,7 @@ public class Main {
             if(args[0].toLowerCase().equals("login"))return "login1";
             else if(args[0].toLowerCase().equals("logout"))return "logout";
             else if(args[0].toLowerCase().equals("register"))return "register";
+            else if(args[0].equalsIgnoreCase("mytickets"))return "mytickets";
           
         }
         else if(args.length==3){
