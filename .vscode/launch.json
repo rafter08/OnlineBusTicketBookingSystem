@@ -6,10 +6,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "OnlineBusTicketBookingSystem_546cf66b"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": ["searchBus"]
+            "args": [
+                "searchBus"
+            ]
         },
         {
             "type": "java",
@@ -17,7 +26,12 @@
             "request": "launch",
             "mainClass": "Main",
             "projectName": "OnlineBusTicketBookingSystem_90446dd",
-            "args" : ["bookTicket","6033","5506965515","22-05-2022"]
+            "args": [
+                "bookTicket",
+                "6033",
+                "5506965515",
+                "22-05-2022"
+            ]
         }
     ]
 }
